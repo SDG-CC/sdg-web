@@ -38,8 +38,8 @@ const Navbar: React.FC = () => {
   }, [lastScrollY]);
 
   const navbarVariants = {
-    hidden: { y: -100, opacity: 0, transition: { duration: 0.5 } },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+    hidden: { y: -100, opacity: 0.3, transition: { duration: 0.8 } },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8 } },
   };
 
   return (
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
       initial="visible"
       animate={isVisible ? "visible" : "hidden"}
     >
-      <nav className="w-full h-16 shadow-lg rounded-b-2xl px-2 flex justify-between items-center border-2 dark:bg-zinc-900">
+      <nav className="w-full h-16 shadow-lg rounded-b-2xl px-2 flex items-center border-2 bg-slate-50 dark:bg-zinc-900">
         <div className="w-full flex flex-row justify-between items-center">
           <Link href="/">
             <Image
