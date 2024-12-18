@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
       initial="visible"
       animate={isVisible ? "visible" : "hidden"}
     >
-      <nav className="w-full h-16 shadow-lg rounded-b-2xl px-2 flex items-center border-2 bg-slate-50 dark:bg-zinc-900">
+      <nav className="w-full h-16 shadow-lg rounded-b-2xl px-2 flex items-center bg-gradient-to-r from-blue-500 via-sky-600 to-emerald-500 dark:bg-gradient-to-r dark:from-blue-900 dark:via-sky-900 dark:to-green-700 dark:bg-zinc-800">
         <div className="w-full flex flex-row justify-between items-center">
           <Link href="/">
             <Image
@@ -63,10 +63,14 @@ const Navbar: React.FC = () => {
           <div>
             <ul className="flex flex-row justify-end">
               <li className="mx-5">
-                <Link href="/about">About</Link>
+                <Link 
+                className='hover:text-gray-100 text-lg dark:hover:text-slate-900'
+                href="/about">About</Link>
               </li>
               <li className="mx-5">
-                <Link href="/contact">Contact</Link>
+                <Link 
+                className='hover:text-gray-100 text-lg dark:hover:text-slate-900'
+                href="/contact">Contact</Link>
               </li>
             </ul>
           </div>

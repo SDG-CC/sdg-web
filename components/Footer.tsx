@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTelegram, faFacebook, faInstagram, faLinkedin, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
 export default function Footer() {
   const controls = useAnimation();
@@ -81,16 +82,62 @@ export default function Footer() {
           >
             <h3 className="text-lg font-bold">Our Community</h3>
             <ul className="mt-4 space-y-2">
-              {["Core Team", "Technical Team", "Management Team", "Design Team", "Content Team"].map((team, index) => (
-                <li key={index}>
-                  <a
+                <li>
+                  <Link
+                    href="/community/OurTeam"
+                    className="text-gray-400 hover:text-white flex items-center"
+                  >
+                    <span className="mr-2 text-orange-500">&gt;</span>Our Team
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="#"
                     className="text-gray-400 hover:text-white flex items-center"
                   >
-                    <span className="mr-2 text-orange-500">&gt;</span> {team}
-                  </a>
+                    <span className="mr-2 text-orange-500">&gt;</span>Core Team
+                  </Link>
                 </li>
-              ))}
+                <li>
+                  <Link
+                    href="#"
+                    className="text-gray-400 hover:text-white flex items-center"
+                  >
+                    <span className="mr-2 text-orange-500">&gt;</span>Technical Team
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-gray-400 hover:text-white flex items-center"
+                  >
+                    <span className="mr-2 text-orange-500">&gt;</span>Management Team
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-gray-400 hover:text-white flex items-center"
+                  >
+                    <span className="mr-2 text-orange-500">&gt;</span>Outreach Team
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-gray-400 hover:text-white flex items-center"
+                  >
+                    <span className="mr-2 text-orange-500">&gt;</span>Design Team
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-gray-400 hover:text-white flex items-center"
+                  >
+                    <span className="mr-2 text-orange-500">&gt;</span>Content Team
+                  </Link>
+                </li>
             </ul>
           </motion.div>
 
