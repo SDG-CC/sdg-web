@@ -8,18 +8,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin {
-  id           String @id @default(cuid())
-  email        String @unique
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
   password     String
   name         String
   imageId      String?
+  role         Role      @default(USER)
+  isVerified   Boolean   @default(false)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
 
+enum Role {
+  ADMIN
+  USER
+  MAINTAINER
+}
+
 model TeamMember {
-  id           String      @id @default(cuid())
+  id           String    @id @default(cuid())
   name         String
   designation  String
   priority     Int
@@ -27,7 +35,7 @@ model TeamMember {
   instagram    String?
   linkedin     String?
   twitter      String?
-  website      String?
+  description  String?
   imageId      String?
   session      String
   createdAt    DateTime  @default(now())
