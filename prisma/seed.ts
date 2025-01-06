@@ -1,20 +1,23 @@
 import {PrismaClient} from '@prisma/client';
+import { hash } from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 async function main() {
-    const user = await prisma.admin.upsert({
+    const password = await hash(process.env.PASSWORD as string, 12)
+    await prisma.user.upsert({
         where: { 
-            email: 'sdgcampusclub.nitrkl@gmail.com'
+            email: process.env.EMAIL
         },
         update: {},
         create: {
-            email: 'sdgcampusclub.nitrkl@gmail.com',
-            name: 'SDG-CC Admin',
-            password: `SDGCC2030`
+            email: process.env.EMAIL as string,
+            name: process.env.NAME as string,
+            password,
+            role: 'ADMIN',
+            isVerified: true
         }
     })
-    console.log({user})
 }
 main()
   .then(() => prisma.$disconnect())
