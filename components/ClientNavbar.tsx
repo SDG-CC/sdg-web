@@ -19,6 +19,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
   
 interface ClientNavbarProps {
   session: any;
@@ -89,9 +91,11 @@ const ClientNavbar: React.FC<ClientNavbarProps> = ({ session }) => {
           {session ? (
             <li className="mx-5">
                 <DropdownMenu>
-                <DropdownMenuTrigger 
-                className="bg-blue-600 rounded-full p-1 w-8 hover:scale-125 active:scale-75 transform-transform duration-75 focus:outline-dashed outline-dashed outline-blue-600">
-                    {firstLetter}
+                <DropdownMenuTrigger>
+                  <Avatar>
+                    <AvatarImage src={`https://utfs.io/f/${session?.user.imageId}`} />
+                    <AvatarFallback>{firstLetter}</AvatarFallback>
+                  </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuLabel>{session.user.name}</DropdownMenuLabel>
