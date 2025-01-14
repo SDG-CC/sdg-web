@@ -18,9 +18,7 @@ const SDGInfo = () => {
             <p className='pr-4 font-medium'>The SDG Campus Club is the official sustainability club of NIT Rourkela, committed to promoting the United Nations' Sustainable Development Goals through impactful events and initiatives. We regularly collaborate with social service clubs to drive awareness and action on environmental and social issues.</p>
             <p>For collaborations, partnerships, or inquiries, feel free to contact us at:</p>
             <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=sdgcampusclub.nitrkl@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:sdgcampusclub.nitrkl@gmail.com"
                 className="text-orange-600"
                 >
                 sdgcampusclub.nitrkl@gmail.com

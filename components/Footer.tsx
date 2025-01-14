@@ -48,7 +48,12 @@ export default function Footer() {
             <h2 className="text-xl font-bold">SDG CAMPUS CLUB</h2>
             <p className="text-gray-400 mt-2">Sustainable Development Goals</p>
             <p className="text-gray-400 mt-4">
-              <span className="font-medium">Email:</span> sdgcampusclub.nitrkl@gmail.com
+              <span className="font-medium">Email: </span> 
+              <a
+              href="mailto:sdgcampusclub.nitrkl@gmail.com"
+              >
+              sdgcampusclub.nitrkl@gmail.com
+              </a>
             </p>
             <img
             src="/SDGWhiteLogo.svg"
