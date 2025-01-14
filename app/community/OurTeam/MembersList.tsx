@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from "framer-motion"
-
+import { MdOutlineDeleteForever } from "react-icons/md"
+import { LiaUserEditSolid } from "react-icons/lia";
 interface Member {
     id: string
     name: string
@@ -10,9 +11,10 @@ interface Member {
     priority: number
 }
 
-export default function MembersList({ members }:{ members: Member[] }) {
+export default function MembersList({ members, session }:{ members: Member[], session: any }) {
 
-    const sortedMembers = [...members].sort((a, b) => a.priority - b.priority);
+    const isAdmin = session?.user.role === "ADMIN"
+    const sortedMembers = [...members].sort((a, b) => a.priority - b.priority)
 
     return (
         <ul className="flex items-center flex-wrap justify-center my-4 mx-auto max-w-[1200px] gap-8">
@@ -29,12 +31,24 @@ export default function MembersList({ members }:{ members: Member[] }) {
                 key={member.id} 
                 className="flex flex-col justify-start items-center m-[10px] min-h-[450px] overflow-hidden w-[300px] shadow-[0_0_5px_rgba(0,0,0,0.5)] rounded-3xl bg-blue-700 text-white">
                     <div className="w-full flex justify-between items-end border-b-[0.5px] border-gray-400 h-20 mb-2">
-                        <h1 className="w-4/5 px-4 h-full flex items-center border-r-[0.5px] border-gray-400 text-2xl font-semibold">{member.designation}</h1>
-                        <img
-                        src="/SDGWhiteLogo.svg"
-                        alt="SDG-logo"
-                        className="h-16 pr-2"
-                        />
+                        <div
+                        className="w-4/5 pl-4 pr-1 h-full flex flex-row justify-between items-center border-r-[0.5px] border-gray-400 text-2xl font-semibold"
+                        >
+                            <h1>{member.designation}</h1>
+                            {isAdmin &&(<div
+                            className="flex flex-col gap-1"
+                            >
+                                <LiaUserEditSolid size={24} />
+                                <MdOutlineDeleteForever size={22} />
+                            </div>)}
+                        </div>
+                        <div>
+                            <img
+                            src="/SDGWhiteLogo.svg"
+                            alt="SDG-logo"
+                            className="h-16 pr-2"
+                            />
+                        </div>
                     </div>
                     <div className="flex items-center justify-center w-3/4 rounded-full overflow-hidden">
                         <img

@@ -2,6 +2,8 @@ import prisma from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
+
+    
     try {
         const members = await prisma.teamMember.findMany()
 
@@ -20,10 +22,16 @@ export async function POST(request: Request) {
             data: info
         })
 
-        return new NextResponse(JSON.stringify(newMember), {status: 201})
+        return NextResponse.json({
+            message: "Member added successfully",
+            ok: true
+        }, {status: 201})
     } catch (error) {
         console.error("Error creating member:", error);
 
-        return NextResponse.json({error: "Failed to create member"}, {status: 500});
+        return NextResponse.json({
+            message: "Failed to create member",
+            ok: false
+        }, {status: 500});
     }
 }

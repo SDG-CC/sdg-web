@@ -41,3 +41,11 @@ model TeamMember {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
+
+model Designation {
+  id          String     @id @default(cuid())
+  name        String
+  priority    Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
