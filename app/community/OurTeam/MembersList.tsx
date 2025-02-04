@@ -3,18 +3,40 @@
 import { motion } from "framer-motion"
 import { MdOutlineDeleteForever } from "react-icons/md"
 import { LiaUserEditSolid } from "react-icons/lia";
+import { MemberDialog } from "@/components/MemberDialog";
+import { useMemo } from "react";
+import toast from "react-hot-toast";
+import { DeleteDialog } from "@/components/DeleteDialog";
 interface Member {
-    id: string
-    name: string
-    designation: string
-    imageId: string
+    id?: string,
+    name: string,
+    designation: string,
+    priority: number | undefined,
+    session: string,
+    imageId?: string,
+    description: string | null,
+    linkedin: string | null,
+    email: string | null,
+    instagram: string | null,
+    twitter: string | null,
+}
+
+type Designations = {
+    id: string,
+    name: string,
     priority: number
 }
 
-export default function MembersList({ members, session }:{ members: Member[], session: any }) {
+type Session = string
+
+export default function MembersList({ members, session, designations, sessions }:{ members: Member[], session: any, designations: Designations[], sessions: Session[] }) {
 
     const isAdmin = session?.user.role === "ADMIN"
-    const sortedMembers = [...members].sort((a, b) => a.priority - b.priority)
+    const sortedMembers = useMemo(() => {
+        return members.every(member => member.priority != undefined)
+          ? [...members].sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0))
+          : [...members];
+      }, [members]);
 
     return (
         <ul className="flex items-center flex-wrap justify-center my-4 mx-auto max-w-[1200px] gap-8">
@@ -38,8 +60,16 @@ export default function MembersList({ members, session }:{ members: Member[], se
                             {isAdmin &&(<div
                             className="flex flex-col gap-1"
                             >
-                                <LiaUserEditSolid size={24} />
-                                <MdOutlineDeleteForever size={22} />
+                                <MemberDialog
+                                    designations={designations} 
+                                    sessions={sessions} 
+                                    TriggerIcon={<LiaUserEditSolid size={24} />}
+                                    MemData={member}
+                                />
+                                <DeleteDialog
+                                id={member.id as string}
+                                TriggerIcon={<MdOutlineDeleteForever size={24} className="mx-auto" />}
+                                />
                             </div>)}
                         </div>
                         <div>

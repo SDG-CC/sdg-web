@@ -25,15 +25,15 @@ import {
   
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FaLink, FaInstagram } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoMailOpenOutline } from "react-icons/io5";
 import { Textarea } from "./ui/textarea"
-import { TiUserAdd } from "react-icons/ti";
 import { BiAddToQueue } from "react-icons/bi";
 import toast, { Toaster } from "react-hot-toast"
+import { useRouter } from "next/navigation"
 
 
 type Designations = {
@@ -45,10 +45,12 @@ type Designations = {
 type Session = string
 
 interface Data {
+  id?: string,
   name: string,
   designation: string,
   priority: number | undefined,
   session: string,
+  imageId?: string,
   description: string | null,
   linkedin: string | null,
   email: string | null,
@@ -56,7 +58,7 @@ interface Data {
   twitter: string | null,
 }
 
-export function MemberDialog({designations, sessions, MemData}: {designations: Designations[], sessions:Session[], MemData?: Data}) {
+export function MemberDialog({designations, sessions, MemData, TriggerIcon}: {designations: Designations[], sessions:Session[], MemData?: Data, TriggerIcon: React.ReactNode}) {
     const [name, setName] = useState<string>("")
     const [designation, setDesignation] = useState<string>("")
     const [priority, setPriority] =  useState<number>()
@@ -72,17 +74,22 @@ export function MemberDialog({designations, sessions, MemData}: {designations: D
     const [newSession, setNewSession] = useState<string>("")
     const [showSessionPopup , setShowSessionPopup] = useState<boolean>(false)
 
-    if (MemData) {
-      setName(MemData.name)
-      setDesignation(MemData.designation)
-      setPriority(MemData.priority)
-      setSession(MemData.session)
-      setDescription(MemData.description)
-      setLinkedin(MemData.linkedin)
-      setEmail(MemData.email)
-      setInstagram(MemData.instagram)
-      setTwitter(MemData.twitter)
-    }
+   const router = useRouter();
+
+    useEffect(() => {
+      if (MemData) {
+        setName(MemData.name)
+        setDesignation(MemData.designation)
+        setPriority(MemData.priority)
+        setSession(MemData.session)
+        setDescription(MemData.description)
+        setLinkedin(MemData.linkedin)
+        setEmail(MemData.email)
+        setInstagram(MemData.instagram)
+        setTwitter(MemData.twitter)
+      }
+    }, [isOpen])
+
 
     const sessionRegex = /^\d{4}-\d{2}$/
 
@@ -123,9 +130,16 @@ export function MemberDialog({designations, sessions, MemData}: {designations: D
         instagram,
         twitter,
       }
+
+      const url = MemData 
+      ? `/api/members/${MemData.id}`
+      : '/api/members'
+
+      const method = MemData ? 'PUT' : 'POST';
+
       try {
-        const res = await fetch('/api/members', {
-          method: 'POST',
+        const res = await fetch(url, {
+          method: method,
           headers: {
             'Content-Type': 'application/json'
           },
@@ -146,7 +160,14 @@ export function MemberDialog({designations, sessions, MemData}: {designations: D
           }, 1000)
           setName("")
           setDesignation("")
+          setPriority(undefined)
           setSession("")
+          setDescription(null)
+          setLinkedin(null)
+          setEmail(null)
+          setInstagram(null)
+          setTwitter(null)
+          router.push("./OurTeam")
           return
         }
       } catch (error) {
@@ -171,7 +192,7 @@ export function MemberDialog({designations, sessions, MemData}: {designations: D
       !isLoading && setIsOpen(open)
     }}>
       <DialogTrigger asChild>
-        <Button onClick={() => setIsOpen(true)} variant="newMemb" className="p-2"><TiUserAdd/></Button>
+        <Button onClick={() => setIsOpen(true)} variant="newMemb" className="p-2">{TriggerIcon}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-h-[100vh] overflow-y-auto">
         <DialogHeader>
@@ -239,11 +260,22 @@ export function MemberDialog({designations, sessions, MemData}: {designations: D
                     <SelectValue placeholder="Select session" />
                 </SelectTrigger>
                 <SelectContent>
-                    {sortedSessions.map((session) => (
-                        <SelectItem 
-                        key={session}
-                        value={session}>{session}</SelectItem>
-                    ))}
+                  {sortedSessions.length > 0 ? (
+                      sortedSessions.map((session) => (
+                          <SelectItem 
+                          key={session}
+                          value={session}>{session}</SelectItem>
+                      ))
+                  ) : (
+                    <SelectItem
+                    key={"no-session"}
+                    value="no-session"
+                    disabled
+                    className="justify-center"
+                    >
+                      No-Session
+                    </SelectItem>
+                  )}
                 </SelectContent>
             </Select>
             <Popover open={showSessionPopup} onOpenChange={setShowSessionPopup}>

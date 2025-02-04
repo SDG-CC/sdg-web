@@ -30,11 +30,37 @@ export async function PUT(request: Request, {params}:{params: Promise<{id: strin
             data: info
         })
     
-        return NextResponse.json(updated)
+        return NextResponse.json({
+            message: "Details updated successfully",
+            ok: true
+        },{ status: 200})
         
     } catch (error) {
-        console.error("Error updating member:", error)
+        return NextResponse.json({
+            message: "Failed to update member",
+            ok: false
+        }, {status: 500})
+    }
+}
 
-        return NextResponse.json({error: "Failed to update member"}, {status: 500})
+export async function DELETE(request: Request, {params}: {params: Promise<{id: string}>}) {
+    try {
+        const id = (await params).id
+
+        await prisma.teamMember.delete({
+            where: {
+                id: id
+            }
+        })
+
+        return NextResponse.json({
+            message: "Member details deleted",
+            ok: true
+        }, { status: 200})
+    } catch (error) {
+        return NextResponse.json({
+            message: "Failed to delete member",
+            ok: false
+        },{ status: 500})
     }
 }

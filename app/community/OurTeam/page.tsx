@@ -2,6 +2,7 @@ import { headers } from "next/headers"
 import MembersList from "./MembersList"
 import { auth } from "@/lib/auth"
 import { MemberDialog } from "@/components/MemberDialog";
+import { TiUserAdd } from "react-icons/ti";
 
 type Session = string
 
@@ -74,19 +75,19 @@ export default async function MembersPage() {
       <div
       className="w-full flex justify-end px-4"
       >
-      {isAdmin && <MemberDialog designations={designations} sessions={sessions}/>}
+      {isAdmin && <MemberDialog designations={designations} sessions={sessions} TriggerIcon={<TiUserAdd/>}/>}
       </div>
       <div className="w-full z-10 mb-16 flex flex-col items-center gap-6 border-y-2 border-zinc-600 dark:border-zinc-400 rounded-3xl">
         <h1 className="font-bold text-3xl text-[#f5f2f2] bg-[#133e66] rounded-xl p-2">Advisory Committee</h1>
-        <MembersList members={profs} session={session}/>
+        <MembersList members={profs} session={session} designations={designations} sessions={sessions}/>
       </div>
       <div className="w-full z-10 mb-16 flex flex-col items-center gap-6 border-y-2 border-zinc-600 dark:border-zinc-400 rounded-3xl">
         <h1 className="font-bold text-3xl text-[#f5f2f2] bg-[#133e66] rounded-xl p-2">Governing Body</h1>
-        <MembersList members={exeBody} session={session}/>
+        <MembersList members={exeBody} session={session} designations={designations} sessions={sessions}/>
       </div>
       <div className="w-full z-10 mb-16 flex flex-col items-center gap-6 border-y-2 border-zinc-600 dark:border-zinc-400 rounded-3xl">
         <h1 className="font-bold text-3xl text-[#f5f2f2] bg-[#133e66] rounded-xl p-2">Members</h1>
-        <MembersList members={remMembers} session={session}/>
+        <MembersList members={remMembers} session={session} designations={designations} sessions={sessions}/>
       </div>
     </div>
   )
