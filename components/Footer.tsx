@@ -89,10 +89,10 @@ export default function Footer() {
             <ul className="mt-4 space-y-2">
                 <li>
                   <Link
-                    href="/community/OurTeam"
+                    href="/community/SDGTeam"
                     className="text-gray-400 hover:text-white flex items-center"
                   >
-                    <span className="mr-2 text-orange-500">&gt;</span>Our Team
+                    <span className="mr-2 text-orange-500">&gt;</span>SDG Team
                   </Link>
                 </li>
                 <li>

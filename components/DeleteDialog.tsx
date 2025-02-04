@@ -69,7 +69,7 @@ export function DeleteDialog({ TriggerIcon, id } : { TriggerIcon : React.ReactNo
                         setTimeout(() => {
                             setIsOpen(false)
                         }, 2000)
-                        router.push("./OurTeam")
+                        router.push("./SDGTeam")
                     }}
                     variant="destructive" 
                     className="hover:bg-destructive hover:scale-105 transition"

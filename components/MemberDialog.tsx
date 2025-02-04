@@ -167,7 +167,7 @@ export function MemberDialog({designations, sessions, MemData, TriggerIcon}: {de
           setEmail(null)
           setInstagram(null)
           setTwitter(null)
-          router.push("./OurTeam")
+          router.push("./SDGTeam")
           return
         }
       } catch (error) {
