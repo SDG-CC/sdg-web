@@ -5,7 +5,6 @@ import { MdOutlineDeleteForever } from "react-icons/md"
 import { LiaUserEditSolid } from "react-icons/lia";
 import { MemberDialog } from "@/components/MemberDialog";
 import { useMemo } from "react";
-import toast from "react-hot-toast";
 import { DeleteDialog } from "@/components/DeleteDialog";
 interface Member {
     id?: string,
@@ -54,21 +53,21 @@ export default function MembersList({ members, session, designations, sessions }
                 className="flex flex-col justify-start items-center m-[10px] min-h-[450px] overflow-hidden w-[300px] shadow-[0_0_5px_rgba(0,0,0,0.5)] rounded-3xl bg-blue-700 text-white">
                     <div className="w-full flex justify-between items-end border-b-[0.5px] border-gray-400 h-20 mb-2">
                         <div
-                        className="w-4/5 pl-4 pr-1 h-full flex flex-row justify-between items-center border-r-[0.5px] border-gray-400 text-2xl font-semibold"
+                        className="w-4/5 pl-3 pr-1 h-full flex flex-row justify-between items-center border-r-[0.5px] border-gray-400 text-2xl font-semibold"
                         >
                             <h1>{member.designation}</h1>
                             {isAdmin &&(<div
-                            className="flex flex-col gap-1"
+                            className="flex flex-col justify-end"
                             >
                                 <MemberDialog
                                     designations={designations} 
                                     sessions={sessions} 
-                                    TriggerIcon={<LiaUserEditSolid size={24} />}
+                                    TriggerIcon={<LiaUserEditSolid />}
                                     MemData={member}
                                 />
                                 <DeleteDialog
                                 id={member.id as string}
-                                TriggerIcon={<MdOutlineDeleteForever size={24} className="mx-auto" />}
+                                TriggerIcon={<MdOutlineDeleteForever />}
                                 />
                             </div>)}
                         </div>

@@ -55,7 +55,7 @@ export function DeleteDialog({ TriggerIcon, id } : { TriggerIcon : React.ReactNo
             setIsOpen(open)
         }}>
             <DialogTrigger asChild>
-                <Button onClick={() => setIsOpen(true)} variant="newMemb">{TriggerIcon}</Button>
+                <Button onClick={() => setIsOpen(true)} variant="newMemb" className="w-[20px]">{TriggerIcon}</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>

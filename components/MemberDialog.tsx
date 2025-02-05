@@ -192,7 +192,7 @@ export function MemberDialog({designations, sessions, MemData, TriggerIcon}: {de
       !isLoading && setIsOpen(open)
     }}>
       <DialogTrigger asChild>
-        <Button onClick={() => setIsOpen(true)} variant="newMemb" className="p-2">{TriggerIcon}</Button>
+        <Button onClick={() => setIsOpen(true)} variant="newMemb" className="w-[20px]">{TriggerIcon}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-h-[100vh] overflow-y-auto">
         <DialogHeader>

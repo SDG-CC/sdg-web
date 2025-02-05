@@ -71,7 +71,7 @@ export default async function MembersPage() {
   const remMembers = members.filter((member: {priority: number}) => member.priority >=110 && member.priority)
 
   return (
-    <div className="w-full pt-20 flex flex-col items-center gap-2 bg-gray-300 dark:bg-gray-800">
+    <div className="w-full pt-16 flex flex-col items-center gap-2 bg-gray-300 dark:bg-gray-800">
       <div
       className="w-full flex justify-end px-4"
       >
